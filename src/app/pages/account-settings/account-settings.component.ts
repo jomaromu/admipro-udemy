@@ -36,7 +36,7 @@ export class AccountSettingsComponent implements OnInit {
       ref.classList.remove('working');
     }
 
-    link.classList.add('working');
+    // link.classList.add('working');
   }
 
   colocarCheck() {
