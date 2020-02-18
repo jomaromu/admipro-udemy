@@ -56,6 +56,8 @@ export class LoginComponent implements OnInit {
       // const profile = googleUser.getBasicProfile();
       const token = googleUser.getAuthResponse().id_token;
 
+      console.log(token);
+
       this._usuarioService.logingGoogle(token)
         .subscribe(resp => {
           this.router.navigate(['/dashboard']);
