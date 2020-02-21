@@ -35,7 +35,7 @@
                 <img *ngIf="!imagenTemp" [src]="usuario.img | imagen" alt=" " class="w150">
                 <img *ngIf="imagenTemp" [src]="usuario.img | imagen" alt=" " class="w150">
 
-                <input (change)="seleccionImagen($event.target.files[0])" type="file">
+                <input (change)="seleccionImagen($event.target.files[0])" name="imagen" type="file">
                 <br><br>
                 <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button " class="btn btn-success waves-effect waves-light m-r-10 btn-block "> <i class="fa fa-save "></i> Actualizar foto </button>
             </div>
