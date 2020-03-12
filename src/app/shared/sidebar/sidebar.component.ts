@@ -13,12 +13,14 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     public sidebar: SidebarService,
+    // tslint:disable-next-line: variable-name
     public _usuarioService: UsuarioService
   ) { }
 
   ngOnInit() {
 
     this.usuario = this._usuarioService.usuario;
+    this.sidebar.cargarMenu();
   }
 
 }
