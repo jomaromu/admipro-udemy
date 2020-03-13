@@ -31,6 +31,31 @@ export class UsuarioService {
     this.cargarStorage();
   }
 
+  renuevaToken() {
+
+    let url = URL_SERVICIOS + '/login/renuevatoken';
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+      .pipe(
+        map((resp: any) => {
+
+          this.token = resp.token;
+          localStorage.setItem('token', this.token);
+          console.log('Token renovado');
+
+          return true;
+        }), catchError(err => {
+      this.router.navigate(['/login']);
+      Swal.fire('No se pudo renovar token', 'No fue posible renovar token', 'error');
+      return Observable.throw(err);
+    })
+
+    )
+
+
+  }
+
   estaLogueado() {
 
     return (this.token.length > 5) ? true : false;
@@ -108,7 +133,7 @@ export class UsuarioService {
           // console.log(resp);
           this.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu);
           return true;
-        }), catchError( err => {
+        }), catchError(err => {
 
           // console.log(err.error.mensaje);
           Swal.fire('Error en el login', err.error.mensaje, 'error')
@@ -129,7 +154,7 @@ export class UsuarioService {
         map((resp: any) => {
           Swal.fire('Usuario Creado', usuario.email);
           return resp.usuario;
-        }), catchError( err => {
+        }), catchError(err => {
 
           // console.log(err.error.mensaje);
           Swal.fire(err.error.mensaje, err.error.errors.message, 'error')
@@ -157,7 +182,7 @@ export class UsuarioService {
           Swal.fire('Usuario actualizado', usuario.nombre, 'success');
 
           return true;
-        }), catchError( err => {
+        }), catchError(err => {
 
           // console.log(err.error.mensaje);
           Swal.fire(err.error.mensaje, err.error.errors.message, 'error')

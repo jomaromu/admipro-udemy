@@ -10,7 +10,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 
 // guards
-import { LoginGuardGuard, AdminGuard } from '../services/service.index';
+import { LoginGuardGuard, AdminGuard, VerificaTokenGuard } from '../services/service.index';
 
 // mantenimientos
 import { UsuariosComponent } from './usuarios/usuarios.component';
@@ -27,7 +27,7 @@ const pagesRoutes: Routes = [
     component: PagesComponent,
     canActivate: [LoginGuardGuard],
     children: [
-      { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard' } },
+      { path: 'dashboard', component: DashboardComponent, canActivate: [VerificaTokenGuard], data: { titulo: 'Dashboard' } },
       { path: 'progress', component: ProgressComponent, data: { titulo: 'Progess' } },
       { path: 'graficas1', component: Graficas1Component, data: { titulo: 'Gráficas' } },
       { path: 'promesas', component: PromesasComponent, data: { titulo: 'Ajustes del tema' } },
